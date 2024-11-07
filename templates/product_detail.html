@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ product.image_url }}" class="img-fluid" alt="{{ product.name }}">
+    </div>
+    <div class="col-md-6">
+        <h1>{{ product.name }}</h1>
+        <p class="lead">${{ "%.2f"|format(product.price) }}</p>
+        <hr>
+        <p>{{ product.description }}</p>
+        
+        <div class="specifications mb-4">
+            <h3>Specifications</h3>
+            <ul class="list-group">
+                {% for key, value in product.specifications.items() %}
+                <li class="list-group-item">
+                    <strong>{{ key }}:</strong> {{ value }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="d-flex align-items-center mb-3">
+            <label for="quantity" class="me-2">Quantity:</label>
+            <input type="number" id="quantity" class="form-control w-25" value="1" min="1" max="{{ product.stock }}">
+        </div>
+        
+        {% if product.stock > 0 %}
+        <button class="btn btn-primary btn-lg" onclick="addToCart({{ product.id }}, document.getElementById('quantity').value)">
+            Add to Cart
+        </button>
+        <span class="ms-3 text-success">In Stock ({{ product.stock }} available)</span>
+        {% else %}
+        <button class="btn btn-secondary btn-lg" disabled>Out of Stock</button>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

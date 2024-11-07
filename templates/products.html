@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Categories</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{{ url_for('products') }}" class="list-group-item list-group-item-action">All Products</a>
+                {% for category in categories %}
+                <a href="{{ url_for('products', category=category.id) }}" 
+                   class="list-group-item list-group-item-action">
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-9">
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for product in products %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description[:100] }}...</p>
+                        <p class="card-text"><strong>${{ "%.2f"|format(product.price) }}</strong></p>
+                        <div class="d-flex justify-content-between">
+                            <a href="{{ url_for('product_detail', product_id=product.id) }}" 
+                               class="btn btn-primary">View Details</a>
+                            <button class="btn btn-success" 
+                                    onclick="addToCart({{ product.id }})">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron text-center py-5">
+    <h1 class="display-4">Welcome to Electronics Store</h1>
+    <p class="lead">Discover the latest in electronic technology</p>
+    <a href="{{ url_for('products') }}" class="btn btn-primary btn-lg">Shop Now</a>
+</div>
+
+<section class="featured-products my-5">
+    <h2 class="text-center mb-4">Featured Products</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in products %}
+        <div class="col">
+            <div class="card h-100">
+                <img src="{{ product.image_url }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <p class="card-text">${{ "%.2f"|format(product.price) }}</p>
+                    <a href="{{ url_for('product_detail', product_id=product.id) }}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="categories my-5">
+    <h2 class="text-center mb-4">Shop by Category</h2>
+    <div class="row row-cols-2 row-cols-md-4 g-4">
+        {% for category in categories %}
+        <div class="col">
+            <a href="{{ url_for('products', category=category.id) }}" class="text-decoration-none">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.name }}</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

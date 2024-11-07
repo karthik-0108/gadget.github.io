@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2 class="card-title mb-4">Order Confirmed!</h2>
+                    <div class="checkmark-circle mb-4">
+                        <i data-feather="check-circle" class="text-success" style="width: 64px; height: 64px;"></i>
+                    </div>
+                    <p class="lead">Thank you for your order. We'll start processing it right away!</p>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h3 class="card-title">Order Details</h3>
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <strong>Order Number:</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            #{{ order.id }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <strong>Order Date:</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            {{ order.date_ordered.strftime('%B %d, %Y') }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <strong>Order Status:</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            <span class="badge bg-success">{{ order.status.title() }}</span>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-4">
+                            <strong>Total Amount:</strong>
+                        </div>
+                        <div class="col-sm-8">
+                            ${{ "%.2f"|format(order.total_amount) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h3 class="card-title">Order Items</h3>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.items %}
+                                <tr>
+                                    <td>{{ item.product.name }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>${{ "%.2f"|format(item.price) }}</td>
+                                    <td>${{ "%.2f"|format(item.price * item.quantity) }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="{{ url_for('products') }}" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

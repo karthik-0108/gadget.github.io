@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Order Confirmation</h2>
+    <p>Dear {{ order.user.username }},</p>
+    <p>Thank you for your order! Here are your order details:</p>
+    
+    <h3>Order #{{ order.id }}</h3>
+    <p>Date: {{ order.date_ordered.strftime('%B %d, %Y') }}</p>
+    
+    <h4>Items Ordered:</h4>
+    <ul>
+    {% for item in order.items %}
+        <li>{{ item.product.name }} x {{ item.quantity }} - ${{ "%.2f"|format(item.price * item.quantity) }}</li>
+    {% endfor %}
+    </ul>
+    
+    <p>Total Amount: ${{ "%.2f"|format(order.total_amount) }}</p>
+    
+    <p>Thank you for shopping with us!</p>
+</body>
+</html>

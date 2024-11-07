@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Shopping Cart</h1>
+
+<div id="cart-items">
+    <!-- Cart items will be dynamically loaded here -->
+</div>
+
+<div class="cart-summary mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Order Summary</h5>
+            <div class="d-flex justify-content-between mb-3">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0.00</span>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <span>Shipping:</span>
+                <span id="shipping">$0.00</span>
+            </div>
+            <div class="d-flex justify-content-between mb-3">
+                <strong>Total:</strong>
+                <strong id="total">$0.00</strong>
+            </div>
+            <button id="checkout-button" class="btn btn-success w-100" onclick="proceedToCheckout()">
+                Proceed to Checkout
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="empty-cart" class="text-center py-5">
+    <h3>Your cart is empty</h3>
+    <p>Add some products to your cart to get started!</p>
+    <a href="{{ url_for('products') }}" class="btn btn-primary">Continue Shopping</a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartDisplay();
+    });
+</script>
+{% endblock %}

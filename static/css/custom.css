@@ -1,0 +1,160 @@
+/* Custom styles that complement the Bootstrap dark theme */
+
+/* General Styles */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+/* Card Enhancements */
+.card {
+    transition: transform 0.2s ease-in-out;
+    border: 1px solid var(--bs-border-color);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Product Image Styles */
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+    padding: 1rem;
+    background: var(--bs-dark);
+}
+
+/* Price Styling */
+.price {
+    font-size: 1.25rem;
+    color: var(--bs-primary);
+    font-weight: bold;
+}
+
+/* Category Cards */
+.categories .card {
+    transition: background-color 0.2s ease;
+}
+
+.categories .card:hover {
+    background-color: var(--bs-primary);
+}
+
+/* Shopping Cart */
+.cart-item {
+    border-bottom: 1px solid var(--bs-border-color);
+    padding: 1rem 0;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+}
+
+/* Product Detail Page */
+.product-image {
+    max-height: 400px;
+    object-fit: contain;
+}
+
+.specifications {
+    background-color: var(--bs-dark);
+    border-radius: 0.375rem;
+    padding: 1rem;
+}
+
+/* Search Bar Enhancement */
+.search-form input {
+    background-color: var(--bs-dark);
+    border-color: var(--bs-border-color);
+}
+
+.search-form input:focus {
+    background-color: var(--bs-dark);
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Checkout Form */
+.checkout-form label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Order Summary Card */
+.order-summary {
+    position: sticky;
+    top: 2rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card-img-top {
+        height: 150px;
+    }
+    
+    .quantity-input {
+        width: 45px;
+    }
+}
+
+/* Custom Button Styles */
+.btn-outline-light:hover {
+    color: var(--bs-dark);
+}
+
+/* Navigation Enhancements */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--bs-primary);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-link:hover:after {
+    width: 100%;
+}
+
+/* Cart Badge */
+.badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    border-radius: 50%;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Flash Messages */
+.alert {
+    border-radius: 0;
+    border: none;
+    margin-bottom: 1rem;
+}
+
+/* Footer Enhancement */
+footer {
+    margin-top: auto;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
